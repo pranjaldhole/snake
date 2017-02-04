@@ -1,5 +1,4 @@
 import pygame
-import time
 import random
 pygame.init()  # initiates all inside pygame; returns a tuple
 
