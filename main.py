@@ -1,6 +1,6 @@
 import pygame, sys
 sys.path.append('/home/pranjal/git_repos/snake/')
-import versions.slither as slither
+from utils import tools
 
 pygame.init()  # initiates all inside pygame; returns a tuple
 
@@ -32,10 +32,32 @@ level = 0
 FPS = 6
 
 # initializing window for display
-display_screen = pygame.display.set_mode(display_size)
-pygame.display.set_caption('Slither')
-pygame.display.set_icon(apple)      #best size is 32x32 for icons
+screen = pygame.display.set_mode(display_size)
+clock = pygame.time.Clock()
+version = tools.game_intro(display_size, colors, myfonts, screen)
 
-slither.game_intro(display_size, colors, myfonts)
-slither.gameLoop(display_size, colors, myfonts)
+if version[0] == 1:
+    from versions import simple
+    game = simple.gameplay(20, 800)
+elif version[0] == 2:
+    pygame.quit()
+    sys.exit('Slither is not hungry yet! Play the crude version!')
+#     from versions import slither
+#     game = simple.gameplay(20, 800)
+switch = True
 
+while switch:
+    dt = clock.tick(12) / 1000.0
+    
+    events = pygame.event.get()
+    game.update(events, dt)
+    
+    for event in events:
+        if event.type == pygame.QUIT:
+            switch = False
+            pygame.quit()
+            sys.exit('you exited the game')
+            
+    screen.fill(colors['black'])
+    game.draw(screen)
+    pygame.display.flip()

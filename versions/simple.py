@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 import random
 from pygame.surface import Surface
 
@@ -62,6 +62,9 @@ class gameplay:
                     self.direction = DIRECTION_DOWN
                 elif event.key == pygame.K_LEFT:
                     self.direction = DIRECTION_LEFT
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit('you exited the game')
 
         self.cooldown = self.cooldown - dt
         if self.cooldown < 0.0:

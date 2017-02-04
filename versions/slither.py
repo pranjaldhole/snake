@@ -90,14 +90,14 @@ def game_intro(display_size, colors, myfonts):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-		sys.exit()
+                sys.exit()
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     intro = False
                 if event.key == pygame.K_q:
                     pygame.quit()
-		    sys.exit()
+                    sys.exit()
 
         screen.fill(colors['white'])
         message_to_screen("Welcome to Slither", colors['green'], -120, "large", myfonts, display_size)

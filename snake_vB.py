@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 import random
 pygame.init()  # initiates all inside pygame; returns a tuple
 
@@ -8,9 +8,9 @@ black = (0, 0, 0)
 red = (255, 0, 0)
 green = (0, 155, 0)
 
-icon = pygame.image.load('E:/pPYTHON stuff/Game making/Slither/apple.png')
-img = pygame.image.load('E:/pPYTHON stuff/Game making/Slither/snake_head.png')
-app = pygame.image.load('E:/pPYTHON stuff/Game making/Slither/apple.png')
+icon = pygame.image.load('/home/pranjal/data/snake/apple.png')
+img = pygame.image.load('/home/pranjal/data/snake/snake_head.png')
+app = pygame.image.load('/home/pranjal/data/snake/apple.png')
 
 AppleThick = app.get_width()
 block_size = AppleThick   # 20
@@ -45,14 +45,14 @@ def pause():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit('You exited the game')
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     paused = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
-                    quit()
+                    sys.exit('You exited the game')
         # gameDisplay.fill(white)
         # clock.tick(5)   # pause
 
@@ -80,14 +80,14 @@ def game_intro():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit('You exited the game')
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     intro = False
                 if event.key == pygame.K_q:
                     pygame.quit()
-                    quit()
+                    sys.exit('You exited the game')
 
         gameDisplay.fill(white)
         message_to_screen("Welcome to Slither", green, -120, "large")
@@ -96,7 +96,6 @@ def game_intro():
         message_to_screen("If you bite into yourself, you die!", black, 50)
         message_to_screen("Press C to play, P to pause, or press Q to quit", black, 160)
         pygame.display.update()
-        # clock.tick(5)
 
 # snake function
 def snake(block_size, snakelist):
@@ -150,7 +149,6 @@ def gameLoop():
 
         # movement and key control
         for event in pygame.event.get():
-            print(event)
             if event.type == pygame.QUIT:
                 gameExit = True
             if event.type == pygame.KEYDOWN:
@@ -242,6 +240,6 @@ def gameLoop():
         clock.tick(FPS)
 
     pygame.quit()  # uninitialize pygame
-    quit()    # exits python
+    sys.exit('You exited the game')    # exits python
 game_intro()
 gameLoop()
