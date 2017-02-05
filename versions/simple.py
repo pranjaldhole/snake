@@ -13,7 +13,6 @@ class Vector2:
         self.x = x
         self.y = y
 
-
 class Snake:
     def __init__(self, pos:Vector2, tail = None):
         self.pos = pos
@@ -28,13 +27,12 @@ class Snake:
             return Snake(self.pos, self.tail.take(n-1))
 
     def draw(self, screen, size):
-        pygame.draw.rect(screen, (255, 255, 255), \
+        pygame.draw.rect(screen, (0, 0, 0), \
                         [self.pos.x * size, self.pos.y * size, size-1, size-1])
         if self.tail is not None:
             self.tail.draw(screen, size)
 
 class gameplay:
-
     def __init__(self, size: int, screenSize:int):
         self.speed = 0.25
         self.cooldown = self.speed
@@ -43,7 +41,6 @@ class gameplay:
         self.snake = Snake(Vector2(size//2, size//2))
         self.screenSize = screenSize
         self.length = 1
-
         self.create_new_food()
 
     def create_new_food(self):
@@ -71,14 +68,23 @@ class gameplay:
             ## time to do the next step in the update
             if self.direction == DIRECTION_UP:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y-1)
+                if self.snake.pos.y == 0:
+                    newPos = Vector2(self.snake.pos.x,self.size-1)
             elif self.direction == DIRECTION_RIGHT:
                 newPos = Vector2(self.snake.pos.x+1, self.snake.pos.y)
+                if self.snake.pos.x == self.size:
+                    newPos = Vector2(0,self.snake.pos.y)
             elif self.direction == DIRECTION_DOWN:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y+1)
+                if self.snake.pos.y == self.size:
+                    newPos = Vector2(self.snake.pos.x,1)
             elif self.direction == DIRECTION_LEFT:
-                newPos = Vector2(self.snake.pos.x-1, self.snake.pos.y)
+                newPos = Vector2(self.snake.pos.x-1,self.snake.pos.y)
+                if self.snake.pos.x == 0:
+                    newPos = Vector2(self.size-1,self.snake.pos.y)
             else:
                 raise Exception("direction not supported")
+
             self.snake = Snake(newPos, self.snake)
             self.snake = self.snake.take(self.length)
             self.cooldown += self.speed
@@ -93,6 +99,6 @@ class gameplay:
     def draw(self, screen: Surface):
         sizeblock = self.screenSize/self.size
         self.snake.draw(screen, sizeblock)
-        pygame.draw.rect(screen, (255, 255, 200), \
+        pygame.draw.rect(screen, (0, 0, 0), \
                         [self.food.x * sizeblock,self.food.y * sizeblock, \
                         sizeblock - 1, sizeblock - 1])

@@ -53,3 +53,21 @@ def msg2screen(msg, color, y_displace, size, font, screen_size, screen):
     textRect.center = (screen_size[0] / 2), (screen_size[1] / 2) + y_displace
     screen.blit(textSurf, textRect)
 
+def pause(color,font, screen_size, screen):
+    paused = True
+    msg2screen("Paused", color['green'], -100,"large",font,screen_size,screen)
+    msg2screen("Press C to continue or Q to quit.", color['green'], 25,\
+               "medium",font, screen_size, screen)
+    pygame.display.update()
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit('You exited the game')
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    paused = False
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit('You exited the game')
