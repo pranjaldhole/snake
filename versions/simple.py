@@ -77,7 +77,7 @@ class gameplay:
             elif self.direction == DIRECTION_DOWN:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y+1)
                 if self.snake.pos.y == self.size:
-                    newPos = Vector2(self.snake.pos.x,1)
+                    newPos = Vector2(self.snake.pos.x,0)
             elif self.direction == DIRECTION_LEFT:
                 newPos = Vector2(self.snake.pos.x-1,self.snake.pos.y)
                 if self.snake.pos.x == 0:
