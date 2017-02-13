@@ -66,11 +66,11 @@ def uppermenu(score, level):
 
 # generates apples at random positions, if the position is the same as snake body, repeat
 def randAppleGen(snakelist):
-    randX = (round(random.randint(0, display_width - AppleThick) / AppleThick))*AppleThick
-    randY = (round(random.randint(menu_thick, display_height - AppleThick) / AppleThick))*AppleThick
+    randX = (random.randint(0, display_width - AppleThick) // AppleThick)*AppleThick
+    randY = (random.randint(menu_thick, display_height - AppleThick) // AppleThick)*AppleThick
     while [randX, randY] in snakelist:
-        randX = (round(random.randint(0, display_width - AppleThick) / AppleThick))*AppleThick
-        randY = (round(random.randint(menu_thick, display_height - AppleThick) / AppleThick))*AppleThick
+        randX = (random.randint(0, display_width - AppleThick) // AppleThick)*AppleThick
+        randY = (random.randint(menu_thick, display_height - AppleThick) // AppleThick)*AppleThick
     return randX, randY
 
 # intro menu
@@ -187,9 +187,7 @@ def gameLoop():
 
 
 
-        snakehead = []
-        snakehead.append(lead_x)
-        snakehead.append(lead_y)
+        snakehead = [lead_x, lead_y]
         snakeList.append(snakehead)
         if len(snakeList) > snakeLength:
             del snakeList[0]
