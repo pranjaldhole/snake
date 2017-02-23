@@ -33,21 +33,22 @@ class Snake:
             self.tail.draw(screen, size)
 
 class gameplay:
-    def __init__(self, steps: int, blocksize:int):
-        """Defines the actual gameplay
+    def __init__(self, max_step: list, blocksize: int):
+        """Initiates the actual gameplay and defines relevant parameters for
+        the game.
 
         Parameters
         ----------
-        steps: list
-            a pair of numbers that defines the number of steps in x and y
-            defines the size of the block (dimensions of the square).
+        max_step: list [x,y]
+            defines maximum number of steps in x and y.
+        blocksize: int
+            defines the size of each square block.
         """
         self.speed = 0.25
         self.cooldown = self.speed
-        self.steps = steps
+        self.steps = max_step
         self.direction = DIRECTION_UP
-        self.snake = Snake(Vector2(steps[0] // 2, steps[1] // 2))
-        # self.screenSize = screenSize      unnecessary, if steps are introduced
+        self.snake = Snake(Vector2(self.steps[0] // 2, self.steps[1] // 2))
         self.blocksize = blocksize
         self.length = 1
         self.create_new_food()
@@ -57,7 +58,7 @@ class gameplay:
                             random.randint(0, self.steps[1] - 1))
 
     def update(self,events, dt:float):
-        #check for new direction
+        #check for change of direction
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
@@ -78,7 +79,7 @@ class gameplay:
             if self.direction == DIRECTION_UP:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y - 1)
                 if self.snake.pos.y == 0: #Check if point is at boundary
-                    newPos = Vector2(self.snake.pos.x, self.steps - 1)
+                    newPos = Vector2(self.snake.pos.x, self.steps[1] - 1)
             elif self.direction == DIRECTION_RIGHT:
                 newPos = Vector2(self.snake.pos.x + 1, self.snake.pos.y)
                 if self.snake.pos.x == self.steps[0] - 1:
@@ -108,5 +109,5 @@ class gameplay:
     def draw(self, screen: Surface):
         self.snake.draw(screen, self.blocksize)
         pygame.draw.rect(screen, (0, 0, 0), \
-                        [self.food.x * self.blocksize, self.food.y * self.blocksize, \
-                        self.blocksize - 1, self.blocksize - 1])
+        [self.food.x * self.blocksize, self.food.y * self.blocksize, \
+        self.blocksize - 1, self.blocksize - 1])

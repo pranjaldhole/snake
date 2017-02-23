@@ -10,8 +10,8 @@ img = pygame.image.load('images/snake_head.png')
 
 # defining game dimensions
 block_size = apple.get_width() #20
-display_width = display_height = 30 * block_size
-display_size = display_width, display_height
+grid = [35, 25]  # Here we define the grid(x,y) for the display (e.g. 35x25).
+display_size = grid[0] * block_size, grid[1] * block_size
 
 # defining colors
 colors = dict(white = (255, 255, 255),
@@ -36,7 +36,7 @@ version = tools.game_intro(display_size, colors, myfonts, screen)
 
 if version[0] == 'simple':
     from versions import simple
-    game = simple.gameplay(block_size, display_size[1])
+    game = simple.gameplay(grid, block_size)
 elif version[0] == 'slither':
     pygame.quit()
     sys.exit('Slither is not hungry yet! Play the crude version!')
