@@ -5,12 +5,12 @@ class vector2:
     def __init__(self, x:int, y:int):
         self.x = x
         self.y = y
-        
+
 class snake:
     def __init__(self, pos:vector2, tail=None):
         self.pos = pos
         self.tail = tail
-        
+
     def eat(self, n:int):
         if n<1:
             return None
@@ -18,7 +18,7 @@ class snake:
             return snake(self.pos)
         else:
             return snake(self.pos, self.tail.take(n-1))
-            
+
     def draw(self, screen, size):
         if direction == 'right':
             head = pygame.transform.rotate(img, 270)
@@ -28,11 +28,11 @@ class snake:
             head = img
         if direction == 'down':
             head = pygame.transform.rotate(img, 180)
-        
+
         pygame.Surface.blit(head, (tail[-1][0], tail[-1][1]))
         for XnY in tail[:-1]:
             pygame.draw.rect(display_screen, colors['green'], [XnY[0], XnY[1], block_size, block_size])
-        
+
 # snake function
 def snake(block_size, tail):
     if direction == 'right':
@@ -48,21 +48,6 @@ def snake(block_size, tail):
     for XnY in tail[:-1]:
         pygame.draw.rect(pygame.Surface, colors['green'], [XnY[0], XnY[1], block_size, block_size])
 
-def pause(colors, myfonts):
-    paused = True
-    message_to_screen("Paused", colors['black'], -100, "large", myfonts, display_size)
-    message_to_screen("Press C to continue or Q to quit.", colors['black'], 25, myfonts, display_size)
-    pygame.display.update()
-    while paused:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
-                    paused = False
-                elif event.key == pygame.K_q:
-                    pygame.quit()
 
 # defines upper bar menu with score and level (speed)
 def uppermenu(score, level, myfonts):
@@ -82,47 +67,6 @@ def randAppleGen(tail):
         randX = (round(random.randint(0, display_width - block_size) / block_size))*block_size
         randY = (round(random.randint(menu_thick, display_height - block_size) / block_size))*block_size
     return randX, randY
-
-# intro menu
-def game_intro(display_size, colors, myfonts):
-    intro = True
-    while intro:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
-                    intro = False
-                if event.key == pygame.K_q:
-                    pygame.quit()
-                    sys.exit()
-
-        screen.fill(colors['white'])
-        message_to_screen("Welcome to Slither", colors['green'], -120, "large", myfonts, display_size)
-        message_to_screen("You are Slither the Snake and your objective is to eat red apples!", colors['black'], -30, "small", myfonts, display_size)
-        message_to_screen("The more apples you eat, the longer you get...", colors['black'], 10, "small", myfonts, display_size)
-        message_to_screen("If you bite into yourself, you die!", colors['black'], 50, "small", myfonts, display_size)
-        message_to_screen("Press C to play, P to pause, or press Q to quit", colors['black'], 160, "small", myfonts, display_size)
-        pygame.display.update()
-        # clock.tick(5)
-
-# general text object
-def text_obj(text, color, size, myfonts):
-    if size == 'small':
-        textSurf = myfonts['smallfont'].render(text, True, color)
-    elif size == 'medium':
-        textSurf = myfonts['medfont'].render(text, True, color)
-    elif size == 'large':
-        textSurf = myfonts['bigfont'].render(text, True, color)
-    return textSurf, textSurf.get_rect()  # second variable is position of the rectangle
-
-# general message on screen
-def message_to_screen(msg, color, y_displace, size, myfonts, display_size):
-    textSurf, textRect = text_obj(msg, color, size, myfonts)
-    textRect.center = (display_size[0] / 2), (display_size[1] / 2) + y_displace
-    pygame.Surface.blit(textSurf, textRect)
 
 # MAIN GAME LOOP
 def gameLoop(display_size, colors, myfonts):
@@ -167,7 +111,7 @@ def gameLoop(display_size, colors, myfonts):
                     lead_vel_x = 0
                 elif event.key == pygame.K_p:
                     pause(colors)
-                    
+
         # boundary conditions
         if lead_x == display_width - block_size and direction == "right":
             lead_x = lead_x - display_width
@@ -235,5 +179,3 @@ def gameLoop(display_size, colors, myfonts):
 
     pygame.quit()  # uninitialize pygame
     quit()    # exits python
-
-
