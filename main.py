@@ -5,11 +5,11 @@ from utils import tools
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-apple = pygame.image.load('/home/pranjal/data/snake/apple.png')
-img = pygame.image.load('/home/pranjal/data/snake/snake_head.png')
+apple = pygame.image.load('images/apple.png')
+img = pygame.image.load('images/snake_head.png')
 
 # defining game dimensions
-block_size = apple.get_width()
+block_size = apple.get_width() #20
 display_width = display_height = 30 * block_size
 display_size = display_width, display_height
 

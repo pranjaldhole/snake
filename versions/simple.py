@@ -33,19 +33,28 @@ class Snake:
             self.tail.draw(screen, size)
 
 class gameplay:
-    def __init__(self, size: int, screenSize:int):
+    def __init__(self, steps: int, screenSize:int):
+        """Defines the actual gameplay
+        
+        Parameters
+        ----------
+        steps: int
+            defines the number of steps in x and y
+        screenSize: int
+            defines steps of the display.
+        """
         self.speed = 0.25
         self.cooldown = self.speed
-        self.size = size
+        self.steps = steps
         self.direction = DIRECTION_UP
-        self.snake = Snake(Vector2(size//2, size//2))
+        self.snake = Snake(Vector2(steps//2, steps//2))
         self.screenSize = screenSize
         self.length = 1
         self.create_new_food()
 
     def create_new_food(self):
-        self.food = Vector2(random.randint(0, self.size-1), \
-                            random.randint(0, self.size-1))
+        self.food = Vector2(random.randint(0, self.steps-1), \
+                            random.randint(0, self.steps-1))
 
     def update(self,events, dt:float):
         #check for new direction
@@ -69,19 +78,19 @@ class gameplay:
             if self.direction == DIRECTION_UP:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y-1)
                 if self.snake.pos.y == 0: #Check if point is at boundary
-                    newPos = Vector2(self.snake.pos.x,self.size-1)
+                    newPos = Vector2(self.snake.pos.x, self.steps-1)
             elif self.direction == DIRECTION_RIGHT:
                 newPos = Vector2(self.snake.pos.x+1, self.snake.pos.y)
-                if self.snake.pos.x == self.size-1:
-                    newPos = Vector2(0,self.snake.pos.y)
+                if self.snake.pos.x == self.steps-1:
+                    newPos = Vector2(0, self.snake.pos.y)
             elif self.direction == DIRECTION_DOWN:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y+1)
-                if self.snake.pos.y == self.size-1:
-                    newPos = Vector2(self.snake.pos.x,0)
+                if self.snake.pos.y == self.steps-1:
+                    newPos = Vector2(self.snake.pos.x, 0)
             elif self.direction == DIRECTION_LEFT:
-                newPos = Vector2(self.snake.pos.x-1,self.snake.pos.y)
+                newPos = Vector2(self.snake.pos.x-1, self.snake.pos.y)
                 if self.snake.pos.x == 0:
-                    newPos = Vector2(self.size-1,self.snake.pos.y)
+                    newPos = Vector2(self.steps-1, self.snake.pos.y)
             else:
                 raise Exception("direction not supported")
 
@@ -92,13 +101,13 @@ class gameplay:
             # check if he gets the food
             if self.snake.pos.x == self.food.x and \
                self.snake.pos.y == self.food.y:
-                self.snake = Snake(self.snake.pos,self.snake)
+                self.snake = Snake(self.snake.pos, self.snake)
                 self.length += 1
                 self.create_new_food()
 
     def draw(self, screen: Surface):
-        sizeblock = self.screenSize/self.size
-        self.snake.draw(screen, sizeblock)
+        blocksize = self.screenSize / self.steps #defines size of block
+        self.snake.draw(screen, blocksize)
         pygame.draw.rect(screen, (0, 0, 0), \
-                        [self.food.x * sizeblock,self.food.y * sizeblock, \
-                        sizeblock - 1, sizeblock - 1])
+                        [self.food.x * blocksize, self.food.y * blocksize, \
+                        blocksize - 1, blocksize - 1])
