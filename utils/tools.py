@@ -11,10 +11,10 @@ def game_intro(screen_size, colors, font, screen):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_s:
-                    version.append(1)
+                    version.append('simple')
                     intro = False
                 elif event.key == pygame.K_c:
-                    version.append(2)
+                    version.append('slither')
                     intro = False
                 elif event.key == pygame.K_q:
                     pygame.quit()

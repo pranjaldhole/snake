@@ -34,10 +34,10 @@ screen = pygame.display.set_mode(display_size)
 clock = pygame.time.Clock()
 version = tools.game_intro(display_size, colors, myfonts, screen)
 
-if version[0] == 1:
+if version[0] == 'simple':
     from versions import simple
     game = simple.gameplay(block_size, display_size[1])
-elif version[0] == 2:
+elif version[0] == 'slither':
     pygame.quit()
     sys.exit('Slither is not hungry yet! Play the crude version!')
 #     from versions import slither
