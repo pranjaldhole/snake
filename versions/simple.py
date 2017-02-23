@@ -65,18 +65,18 @@ class gameplay:
 
         self.cooldown = self.cooldown - dt
         if self.cooldown < 0.0:
-            ## time to do the next step in the update
+            ## Updating snake position
             if self.direction == DIRECTION_UP:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y-1)
-                if self.snake.pos.y == 0:
+                if self.snake.pos.y == 0: #Check if point is at boundary
                     newPos = Vector2(self.snake.pos.x,self.size-1)
             elif self.direction == DIRECTION_RIGHT:
                 newPos = Vector2(self.snake.pos.x+1, self.snake.pos.y)
-                if self.snake.pos.x == self.size:
+                if self.snake.pos.x == self.size-1:
                     newPos = Vector2(0,self.snake.pos.y)
             elif self.direction == DIRECTION_DOWN:
                 newPos = Vector2(self.snake.pos.x, self.snake.pos.y+1)
-                if self.snake.pos.y == self.size:
+                if self.snake.pos.y == self.size-1:
                     newPos = Vector2(self.snake.pos.x,0)
             elif self.direction == DIRECTION_LEFT:
                 newPos = Vector2(self.snake.pos.x-1,self.snake.pos.y)
