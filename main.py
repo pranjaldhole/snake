@@ -14,15 +14,15 @@ grid = [35, 25]  # Here we define the grid(x,y) for the display (e.g. 35x25).
 display_size = grid[0] * block_size, grid[1] * block_size
 
 # defining colors
-colors = dict(white = (255, 255, 255),
-             black = (0, 0, 0),
-             red = (255, 0, 0),
-             green = (0, 155, 0))
+colors = dict(white=(255, 255, 255),
+              black=(0, 0, 0),
+              red=(255, 0, 0),
+              green=(0, 155, 0))
 
 # Defining custom fonts
-myfonts = dict(smallfont = pygame.font.SysFont("comicsansms", 15),
-               medfont = pygame.font.SysFont("comicsansms", 30),
-               bigfont = pygame.font.SysFont("comicsansms", 50))
+myfonts = dict(smallfont=pygame.font.SysFont("comicsansms", 15),
+               medfont=pygame.font.SysFont("comicsansms", 30),
+               bigfont=pygame.font.SysFont("comicsansms", 50))
 
 # Global gameplay variables
 direction = "right"

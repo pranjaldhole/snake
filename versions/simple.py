@@ -3,13 +3,13 @@ import random
 from pygame.surface import Surface
 
 DIRECTION_UP = "up"
-DIRECTION_RIGHT = "rigth"
+DIRECTION_RIGHT = "right"
 DIRECTION_DOWN = "down"
 DIRECTION_LEFT = "left"
 
 
 class Vector2:
-    def __init__(self, x:int, y:int):
+    def __init__(self, x: int, y: int):
         self.x = x
         self.y = y
 
