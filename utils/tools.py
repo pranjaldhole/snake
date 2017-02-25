@@ -16,6 +16,9 @@ def game_intro(screen_size, colors, font, screen):
                 elif event.key == pygame.K_c:
                     version.append('slither')
                     intro = False
+                elif event.key == pygame.K_v:
+                    version.append('slither_v1')
+                    intro = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit('You exited the game')
