@@ -28,12 +28,16 @@ class snake:
         self.head = head_xy
         self.body = body
 
-    def draw_body(self, screen: Surface, blocksize: int):
-        """ Draws a part of the body (block) for each point in body list
+    def draw_snake(self, head_img, screen: Surface, blocksize: int):
+        """ Draws a head at the coords of the last element in body (head coords)
+        Then draws a part of the body (block) for each point in body list,
+        except the head
         """
-        for part in self.body:
+        for part in self.body[:-1]:
             pygame.draw.rect(screen, (0, 0, 0), \
-             [part.x * blocksize, part.y * blocksize, blocksize, blocksize])
+              [part.x * blocksize, part.y * blocksize,\
+               blocksize - 1, blocksize - 1])
+        screen.blit(head_img, (self.head.x * blocksize, self.head.y * blocksize))
 
 class gameplay:
     def __init__(self, max_step: list, blocksize: int):
@@ -61,7 +65,6 @@ class gameplay:
         # initializes the apple position
         self.apple = vector2(randint(0, self.steps[0] - 1),\
                              randint(0, self.steps[1] - 1))
-        self.length = 1
 
     def update(self, events, dt:float):
         """ Updates the position of snake with:
@@ -99,20 +102,16 @@ class gameplay:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a and self.direction != "right":
                     self.direction = "left"
-                    self.velocity.x = - 1
-                    self.velocity.y = 0
+                    self.velocity = vector2(-1, 0)
                 elif event.key == pygame.K_d and self.direction != "left":
                     self.direction = "right"
-                    self.velocity.x = 1
-                    self.velocity.y = 0
+                    self.velocity = vector2(1, 0)
                 elif event.key == pygame.K_w and self.direction != "down":
                     self.direction = "up"
-                    self.velocity.x = 0
-                    self.velocity.y = - 1
+                    self.velocity = vector2(0, -1)
                 elif event.key == pygame.K_s and self.direction != "up":
                     self.direction = "down"
-                    self.velocity.x = 0
-                    self.velocity.y = 1
+                    self.velocity = vector2(0, 1)
 
         # 2. Boundary collision conditions
         if self.slither.head.x == self.steps[0] - 1 and self.direction == "right":
@@ -125,15 +124,11 @@ class gameplay:
             self.slither.head.y = self.steps[1]
 
         # Updates position based on the changes in 1. and 2. above
-        self.slither.head.x += self.velocity.x
-        self.slither.head.y += self.velocity.y
+        self.slither.head = vector2(self.slither.head.x + self.velocity.x, \
+                                    self.slither.head.y + self.velocity.y)
 
         # adds the head's new position to the body
         self.slither.body.append(vector2(self.slither.head.x, self.slither.head.y))
-
-        # deletes the position of the tail from the body
-        if len(self.slither.body) > 1:
-            self.slither.body = self.slither.body[1:]
 
         # 3. Does the snake eat the apple?
         # Note that both head and food are of the same class vector2
@@ -147,8 +142,15 @@ class gameplay:
             # the apple)
             self.slither.body.insert(0, self.slither.body[0])
 
+        # deletes the position of the tail from the body;
+        # avoided issue: note that deletion of the tail has to happen <after> the growth of
+        # the body, but <before> the new snake is drawn for that step; otherwise
+        # the snake's head is drawn on top of the previous body part
+        if len(self.slither.body) > 1:
+            self.slither.body = self.slither.body[1:]
 
-    def draw(self, screen: Surface):
+
+    def draw(self, snake_head, screen: Surface):
         """ A function that draws the snake (and apples) onto screen
 
         Arguments
@@ -156,7 +158,15 @@ class gameplay:
         screen: Surface
             takes the actual game screen surface to draw on
         """
-        self.slither.draw_body(screen, self.blocksize)
+        if self.direction == 'right':
+            head = pygame.transform.rotate(snake_head, 270)
+        if self.direction == 'left':
+            head = pygame.transform.rotate(snake_head, 90)
+        if self.direction == 'up':
+            head = snake_head
+        if self.direction == 'down':
+            head = pygame.transform.rotate(snake_head, 180)
+        self.slither.draw_snake(head, screen, self.blocksize)
         pygame.draw.rect(screen, (0, 0, 0), \
             [self.apple.x * self.blocksize, self.apple.y * self.blocksize, \
-            self.blocksize, self.blocksize])
+            self.blocksize - 1, self.blocksize - 1])
