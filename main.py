@@ -5,11 +5,14 @@ from utils import tools
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-apple = pygame.image.load('images/apple.png')
-img = pygame.image.load('images/snake_head.png')
+#img_apple = pygame.image.load('D:/Github/snake/images/apple.png')
+#img_head = pygame.image.load('D:/Github/snake/images/snake_head.png')
+
+img_apple = pygame.image.load('images/apple.png')
+img_head = pygame.image.load('images/snake_head.png')
 
 # defining game dimensions
-block_size = apple.get_width() #20
+block_size = img_head.get_width() #20
 grid = [35, 25]  # Here we define the grid(x,y) for the display (e.g. 35x25).
 display_size = grid[0] * block_size, grid[1] * block_size
 
@@ -65,5 +68,5 @@ while switch:
                 tools.pause(colors, myfonts, display_size, screen)
 
     screen.fill(colors['white'])
-    game.draw(screen)
+    game.draw(img_head, screen)
     pygame.display.flip()
