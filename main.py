@@ -38,8 +38,8 @@ if version[0] == 'simple':
     from versions import simple
     game = simple.gameplay(grid, block_size)
 elif version[0] == 'slither_class':
-    from versions import slither_v1
-    game = slither_v1.gameplay(grid, block_size)
+    from versions import slither_class
+    game = slither_class.gameplay(grid, block_size)
 elif version[0] == 'slither':
     pygame.quit()
     sys.exit('Slither is not hungry yet! Play the crude/class-based version!')
