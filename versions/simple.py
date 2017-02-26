@@ -106,8 +106,22 @@ class gameplay:
                 self.length += 1
                 self.create_new_food()
 
-    def draw(self, screen: Surface):
+    def draw(self, snake_head, screen: Surface):
+        # rotates the head image to follow the direction of movement
+        if self.direction == DIRECTION_RIGHT:
+            head = pygame.transform.rotate(snake_head, 270)
+        if self.direction == DIRECTION_LEFT:
+            head = pygame.transform.rotate(snake_head, 90)
+        if self.direction == DIRECTION_UP:
+            head = snake_head
+        if self.direction == DIRECTION_DOWN:
+            head = pygame.transform.rotate(snake_head, 180)
+        # draws snake (including the head as block, due to its iterative definition)
         self.snake.draw(screen, self.blocksize)
+        # draws only the head (because the snake.draw() cannot implement it)
+        screen.blit(head, (self.snake.pos.x * self.blocksize, \
+                            self.snake.pos.y * self.blocksize))
+        # draws an apple
         pygame.draw.rect(screen, (0, 0, 0), \
         [self.food.x * self.blocksize, self.food.y * self.blocksize, \
         self.blocksize - 1, self.blocksize - 1])
