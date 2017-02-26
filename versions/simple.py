@@ -57,7 +57,7 @@ class gameplay:
         self.food = Vector2(random.randint(0, self.steps[0] - 1), \
                             random.randint(0, self.steps[1] - 1))
 
-    def update(self,events, dt:float):
+    def update(self, events, dt:float):
         #check for change of direction
         for event in events:
             if event.type == pygame.KEYDOWN:

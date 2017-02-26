@@ -27,7 +27,7 @@ myfonts = dict(smallfont=pygame.font.SysFont("comicsansms", 15),
 # Global gameplay variables
 direction = "right"
 level = 0
-FPS = 6
+FPS = 5
 
 # initializing window for display
 screen = pygame.display.set_mode(display_size)
@@ -37,9 +37,12 @@ version = tools.game_intro(display_size, colors, myfonts, screen)
 if version[0] == 'simple':
     from versions import simple
     game = simple.gameplay(grid, block_size)
+elif version[0] == 'slither_class':
+    from versions import slither_v1
+    game = slither_v1.gameplay(grid, block_size)
 elif version[0] == 'slither':
     pygame.quit()
-    sys.exit('Slither is not hungry yet! Play the crude version!')
+    sys.exit('Slither is not hungry yet! Play the crude/class-based version!')
 #     from versions import slither
 #     game = slither.gameplay(block_size, display_size)
 switch = True

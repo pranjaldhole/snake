@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 from random import randint
 from pygame.surface import Surface
 
@@ -53,15 +53,17 @@ class gameplay:
         # a local method 'self.slither'
         head_pos = vector2(max_step[0] // 2, max_step[1] // 2)
         self.slither = snake(head_pos, [head_pos])
+
         # initiates the velocity and direction
         self.velocity = vector2(1, 0)
         self.direction = init_direction
+
         # initializes the apple position
         self.apple = vector2(randint(0, self.steps[0] - 1),\
                              randint(0, self.steps[1] - 1))
         self.length = 1
 
-    def update(self, events):
+    def update(self, events, dt:float):
         """ Updates the position of snake with:
 
         1. Movement direction update
@@ -146,7 +148,7 @@ class gameplay:
             self.slither.body.insert(0, self.slither.body[0])
 
 
-    def draw_to_screen(self, screen: Surface):
+    def draw(self, screen: Surface):
         """ A function that draws the snake (and apples) onto screen
 
         Arguments

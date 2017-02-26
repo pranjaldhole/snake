@@ -1,16 +1,16 @@
 import pygame, sys
-sys.path.append('E:/pPYTHON stuff/Game making/Slither')
+sys.path.append('/home/pranjal/git_repos/snake/')
 from utils import tools
 
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-apple = pygame.image.load('E:/pPYTHON stuff/Game making/Slither/apple.png')
-img = pygame.image.load('E:/pPYTHON stuff/Game making/Slither/snake_head.png')
+apple = pygame.image.load('images/apple.png')
+img = pygame.image.load('images/snake_head.png')
 
 # defining game dimensions
 block_size = 30 # apple.get_width() #20
-steps = [15, 10]
+steps = [35, 25]
 display_size = [steps[0] * block_size, steps[1] * block_size]
 
 # defining colors
@@ -48,7 +48,7 @@ elif version[0] == 'slither':
 switch = True
 
 while switch:
-    clock.tick(FPS)
+    dt = clock.tick(FPS)
 
     events = pygame.event.get()
     game.update(events)

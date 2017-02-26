@@ -17,7 +17,7 @@ def game_intro(screen_size, colors, font, screen):
                     version.append('slither')
                     intro = False
                 elif event.key == pygame.K_v:
-                    version.append('slither_v1')
+                    version.append('slither_class')
                     intro = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
@@ -34,6 +34,8 @@ def game_intro(screen_size, colors, font, screen):
         msg2screen("If you bite into yourself, you die!",\
                     colors['black'], 50, "small", font, screen_size,screen)
         msg2screen("Press s to play crude version or c to go on gobble-spree",\
+                    colors['black'], 130, "small", font, screen_size, screen)
+        msg2screen("Press v to play class-based version of Slither",\
                     colors['black'], 150, "small", font, screen_size, screen)
         msg2screen("Press p to pause or press q to quit",\
                     colors['black'], 180, "small", font, screen_size, screen)
