@@ -56,6 +56,10 @@ while switch:
     events = pygame.event.get()
     game.update(events, dt)
 
+    # if game.gameover = True:
+        # ????? should stop the game, bring Game Over message, and ask the player
+        # if they want to quit or play again; or come back to the main menu
+
     for event in events:
         if event.type == pygame.QUIT:
             switch = False
@@ -68,5 +72,5 @@ while switch:
                 tools.pause(colors, myfonts, display_size, screen)
 
     screen.fill(colors['white'])
-    game.draw(img_head, screen)
+    game.draw(img_head, colors['green'], colors['red'], screen)
     pygame.display.flip()
