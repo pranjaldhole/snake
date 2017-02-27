@@ -74,5 +74,4 @@ def pause(color,font, screen_size, screen):
                 if event.key == pygame.K_c:
                     paused = False
                 elif event.key == pygame.K_q:
-                    pygame.quit()
-                    sys.exit('You exited the game')
+                    game_intro(screen_size, color, font, screen)
