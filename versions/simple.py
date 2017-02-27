@@ -26,14 +26,14 @@ class Snake:
         else:
             return Snake(self.pos, self.tail.take(n-1))
 
-    def draw(self, screen, size):
-        pygame.draw.rect(screen, (0, 0, 0), \
+    def draw(self, color, screen, size):
+        pygame.draw.rect(screen, color, \
                         [self.pos.x * size, self.pos.y * size, size-1, size-1])
         if self.tail is not None:
-            self.tail.draw(screen, size)
+            self.tail.draw(color, screen, size)
 
 class gameplay:
-    def __init__(self, max_step: list, blocksize: int):
+    def __init__(self, max_step: list, blocksize: int, gameover = False):
         """Initiates the actual gameplay and defines relevant parameters for
         the game.
 
@@ -44,6 +44,8 @@ class gameplay:
         blocksize: int
             defines the size of each square block.
         """
+        # self.gameover = gameover          not used because of unknown snake
+        # mechanism
         self.speed = 0.25
         self.cooldown = self.speed
         self.steps = max_step
@@ -106,7 +108,7 @@ class gameplay:
                 self.length += 1
                 self.create_new_food()
 
-    def draw(self, snake_head, screen: Surface):
+    def draw(self, snake_head, snake_color, apple_color, screen: Surface):
         # rotates the head image to follow the direction of movement
         if self.direction == DIRECTION_RIGHT:
             head = pygame.transform.rotate(snake_head, 270)
@@ -117,11 +119,11 @@ class gameplay:
         if self.direction == DIRECTION_DOWN:
             head = pygame.transform.rotate(snake_head, 180)
         # draws snake (including the head as block, due to its iterative definition)
-        self.snake.draw(screen, self.blocksize)
+        self.snake.draw(snake_color, screen, self.blocksize)
         # draws only the head (because the snake.draw() cannot implement it)
         screen.blit(head, (self.snake.pos.x * self.blocksize, \
                             self.snake.pos.y * self.blocksize))
         # draws an apple
-        pygame.draw.rect(screen, (0, 0, 0), \
+        pygame.draw.rect(screen, apple_color, \
         [self.food.x * self.blocksize, self.food.y * self.blocksize, \
         self.blocksize - 1, self.blocksize - 1])

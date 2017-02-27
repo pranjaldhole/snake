@@ -28,19 +28,19 @@ class snake:
         self.head = head_xy
         self.body = body
 
-    def draw_snake(self, head_img, screen: Surface, blocksize: int):
+    def draw_snake(self, head_img, color, screen: Surface, blocksize: int):
         """ Draws a head at the coords of the last element in body (head coords)
         Then draws a part of the body (block) for each point in body list,
         except the head
         """
         for part in self.body[:-1]:
-            pygame.draw.rect(screen, (0, 0, 0), \
+            pygame.draw.rect(screen, color, \
               [part.x * blocksize, part.y * blocksize,\
                blocksize - 1, blocksize - 1])
         screen.blit(head_img, (self.head.x * blocksize, self.head.y * blocksize))
 
 class gameplay:
-    def __init__(self, max_step: list, blocksize: int):
+    def __init__(self, max_step: list, blocksize: int, gameover = False):
         """Initiates the actual gameplay and defines relevant parameters for
         the game.
 
@@ -51,6 +51,7 @@ class gameplay:
         blocksize: int
             defines the size of each square block.
         """
+        self.gameover = gameover
         self.steps = max_step
         self.blocksize = blocksize
         # initiates the position of the snake and imports the 'snake' class into
@@ -149,8 +150,13 @@ class gameplay:
         if len(self.slither.body) > 1:
             self.slither.body = self.slither.body[1:]
 
+        # 4. Does the snake bite itself? If so, game over
+        for part in self.slither.body[:-1]:
+            if (self.slither.head.x, self.slither.head.y) == (part.x, part.y):
+               self.gameover = True
+               print('Game over')
 
-    def draw(self, snake_head, screen: Surface):
+    def draw(self, snake_head, snake_color, apple_color, screen: Surface):
         """ A function that draws the snake (and apples) onto screen
 
         Arguments
@@ -166,7 +172,7 @@ class gameplay:
             head = snake_head
         if self.direction == 'down':
             head = pygame.transform.rotate(snake_head, 180)
-        self.slither.draw_snake(head, screen, self.blocksize)
-        pygame.draw.rect(screen, (0, 0, 0), \
+        self.slither.draw_snake(head, snake_color, screen, self.blocksize)
+        pygame.draw.rect(screen, apple_color, \
             [self.apple.x * self.blocksize, self.apple.y * self.blocksize, \
             self.blocksize - 1, self.blocksize - 1])
