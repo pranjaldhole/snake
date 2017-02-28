@@ -72,5 +72,5 @@ while switch:
                 tools.pause(colors, myfonts, display_size, screen)
 
     screen.fill(colors['white'])
-    game.draw(img_head, colors['green'], colors['red'], screen)
+    game.draw(img_head, colors['green'], img_apple, screen)
     pygame.display.flip()
