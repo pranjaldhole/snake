@@ -55,8 +55,10 @@ def msg2screen(msg, color, y_displace, size, font, screen_size, screen):
     textRect.center = (screen_size[0] / 2), (screen_size[1] / 2) + y_displace
     screen.blit(textSurf, textRect)
 
-def pause(color,font, screen_size, screen):
+def pause(color,font, screen_size, screen, version):
     paused = True
+    switch = True
+    version_new = version
     msg2screen("Paused", color['green'], -100,"large",font,screen_size,screen)
     msg2screen("Press C to continue or Q to quit.", color['green'], 25,\
                "medium",font, screen_size, screen)
@@ -72,12 +74,15 @@ def pause(color,font, screen_size, screen):
                     paused = False
                 elif event.key == pygame.K_q:
                     paused = False
-                    gameover = True
-                    game_over(screen_size, color, font, screen)
-    return(not gameover)
+                    version_new = game_over(screen_size,color,font,\
+                                            screen,version)
+                    if version_new != version:
+                        switch = False
+    return(version_new, switch)
 
-def game_over(screen_size, colors, font, screen):
+def game_over(screen_size, colors, font, screen, version):
     gameover = True
+    version_new = version
     while gameover:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -86,7 +91,7 @@ def game_over(screen_size, colors, font, screen):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     gameover = False
-                    game_intro(screen_size, colors, font, screen)
+                    version_new = game_intro(screen_size, colors, font, screen)
 
         screen.fill(colors['white'])
         msg2screen("Gameover", colors['green'], -120, "large",\
@@ -96,3 +101,4 @@ def game_over(screen_size, colors, font, screen):
         msg2screen("Press q to return to start screen",\
                     colors['black'], 180, "small", font, screen_size, screen)
         pygame.display.update()
+    return(version_new)
