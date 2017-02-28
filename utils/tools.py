@@ -2,7 +2,7 @@ import pygame, sys
 
 def game_intro(screen_size, colors, font, screen):
     intro = True
-    version = []
+    version = None
     while intro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -11,13 +11,10 @@ def game_intro(screen_size, colors, font, screen):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_s:
-                    version.append('simple')
-                    intro = False
-                elif event.key == pygame.K_c:
-                    version.append('slither')
+                    version = 'simple'
                     intro = False
                 elif event.key == pygame.K_v:
-                    version.append('slither_class')
+                    version = 'slither_class'
                     intro = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
@@ -33,9 +30,9 @@ def game_intro(screen_size, colors, font, screen):
                     colors['black'], 10, "small", font, screen_size,screen)
         msg2screen("If you bite into yourself, you die!",\
                     colors['black'], 50, "small", font, screen_size,screen)
-        msg2screen("Press s to play crude version or c to go on gobble-spree",\
+        msg2screen("Press s to play crude version or",\
                     colors['black'], 130, "small", font, screen_size, screen)
-        msg2screen("Press v to play class-based version of Slither",\
+        msg2screen("press v to play class-based version of Slither",\
                     colors['black'], 150, "small", font, screen_size, screen)
         msg2screen("Press p to pause or press q to quit",\
                     colors['black'], 180, "small", font, screen_size, screen)
@@ -74,4 +71,28 @@ def pause(color,font, screen_size, screen):
                 if event.key == pygame.K_c:
                     paused = False
                 elif event.key == pygame.K_q:
-                    game_intro(screen_size, color, font, screen)
+                    paused = False
+                    gameover = True
+                    game_over(screen_size, color, font, screen)
+    return(not gameover)
+
+def game_over(screen_size, colors, font, screen):
+    gameover = True
+    while gameover:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit('You exited the game')
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    gameover = False
+                    game_intro(screen_size, colors, font, screen)
+
+        screen.fill(colors['white'])
+        msg2screen("Gameover", colors['green'], -120, "large",\
+                    font, screen_size, screen)
+        msg2screen(("Scorecard is yet to be added."),\
+                    colors['red'], -30, "small", font, screen_size,screen)
+        msg2screen("Press q to return to start screen",\
+                    colors['black'], 180, "small", font, screen_size, screen)
+        pygame.display.update()
