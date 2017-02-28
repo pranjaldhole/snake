@@ -34,31 +34,36 @@ screen = pygame.display.set_mode(display_size)
 clock = pygame.time.Clock()
 version = tools.game_intro(display_size, colors, myfonts, screen)
 
-if version == 'simple':
-    from versions import simple
-    game = simple.gameplay(grid, block_size)
-elif version == 'slither_class':
-    from versions import slither_class
-    game = slither_class.gameplay(grid, block_size)
-switch = True
-
-while switch:
-    dt = clock.tick(FPS)
-
-    events = pygame.event.get()
-    game.update(events, dt)
-
-    for event in events:
-        if event.type == pygame.QUIT:
-            switch = False
-            pygame.quit()
-            sys.exit('you exited the game')
-        elif event.type == pygame.mouse.get_focused:
-            continue
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_p:
-                tools.pause(colors, myfonts, display_size, screen)
-
-    screen.fill(colors['white'])
-    game.draw(img_head, colors['green'], img_apple, screen)
-    pygame.display.flip()
+gui = True
+while gui:
+    if version == 'simple':
+        from versions import simple
+        game = simple.gameplay(grid, block_size)
+    elif version == 'slither_class':
+        from versions import slither_class
+        game = slither_class.gameplay(grid, block_size)
+    switch = True
+    while switch:
+        dt = clock.tick(FPS)
+    
+        events = pygame.event.get()
+        game.update(events, dt)
+    
+        for event in events:
+            if event.type == pygame.QUIT:
+                switch = False
+                pygame.quit()
+                sys.exit('you exited the game')
+            elif event.type == pygame.mouse.get_focused:
+                continue
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    params = tools.pause(colors, myfonts, display_size,\
+                                          screen, version)
+                    if params[1] == False:
+                        version = params[0]
+                        switch = False
+    
+        screen.fill(colors['white'])
+        game.draw(img_head, colors['green'], img_apple, screen)
+        pygame.display.flip()
