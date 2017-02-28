@@ -5,9 +5,6 @@ from utils import tools
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-#img_apple = pygame.image.load('D:/Github/snake/images/apple.png')
-#img_head = pygame.image.load('D:/Github/snake/images/snake_head.png')
-
 img_apple = pygame.image.load('images/apple.png')
 img_head = pygame.image.load('images/snake_head.png')
 
@@ -37,17 +34,12 @@ screen = pygame.display.set_mode(display_size)
 clock = pygame.time.Clock()
 version = tools.game_intro(display_size, colors, myfonts, screen)
 
-if version[0] == 'simple':
+if version == 'simple':
     from versions import simple
     game = simple.gameplay(grid, block_size)
-elif version[0] == 'slither_class':
+elif version == 'slither_class':
     from versions import slither_class
     game = slither_class.gameplay(grid, block_size)
-elif version[0] == 'slither':
-    pygame.quit()
-    sys.exit('Slither is not hungry yet! Play the crude/class-based version!')
-#     from versions import slither
-#     game = slither.gameplay(block_size, display_size)
 switch = True
 
 while switch:
@@ -55,10 +47,6 @@ while switch:
 
     events = pygame.event.get()
     game.update(events, dt)
-
-    # if game.gameover = True:
-        # ????? should stop the game, bring Game Over message, and ask the player
-        # if they want to quit or play again; or come back to the main menu
 
     for event in events:
         if event.type == pygame.QUIT:
