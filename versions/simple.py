@@ -107,12 +107,12 @@ class gameplay:
                 self.length += 1
                 self.create_new_food()
 
-    def draw(self, snake_head, snake_color, apple_color, screen: Surface):
+    def draw(self, snake_head, snake_color, apple_img, screen: Surface):
         # draws snake
         self.snake.draw(snake_color, screen, self.blocksize)
- 
+
         # draws an apple
-        pygame.draw.rect(screen, apple_color,\
+        pygame.draw.rect(screen, (255, 0, 0),\
                          [self.food.x * self.blocksize,\
                           self.food.y * self.blocksize,\
                           self.blocksize - 1, self.blocksize - 1])
