@@ -156,7 +156,7 @@ class gameplay:
                self.gameover = True
                print('Game over')
 
-    def draw(self, snake_head, snake_color, apple_color, screen: Surface):
+    def draw(self, snake_head, snake_color, apple_img, screen: Surface):
         """ A function that draws the snake (and apples) onto screen
 
         Arguments
@@ -173,6 +173,7 @@ class gameplay:
         if self.direction == 'down':
             head = pygame.transform.rotate(snake_head, 180)
         self.slither.draw_snake(head, snake_color, screen, self.blocksize)
-        pygame.draw.rect(screen, apple_color, \
-            [self.apple.x * self.blocksize, self.apple.y * self.blocksize, \
-            self.blocksize - 1, self.blocksize - 1])
+        screen.blit(apple_img, (self.apple.x * self.blocksize, self.apple.y * self.blocksize))
+        #pygame.draw.rect(screen, apple_color, \
+        #    [self.apple.x * self.blocksize, self.apple.y * self.blocksize, \
+        #    self.blocksize - 1, self.blocksize - 1])
