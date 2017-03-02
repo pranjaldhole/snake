@@ -28,17 +28,16 @@ myfonts = dict(smallfont=pygame.font.SysFont("comicsansms", 15),
                bigfont=pygame.font.SysFont("comicsansms", 50))
 
 # Global gameplay variables
-direction = "right"
 level = 0
 FPS = 5
 
 # initializing window for display
 screen = pygame.display.set_mode(display_size)
 clock = pygame.time.Clock()
-    version = tools.game_intro(display_size, colors, myfonts, screen)
 
 gui = True
 while gui:
+    version = tools.game_intro(display_size, colors, myfonts, screen)
     if version == 'simple':
         from versions import simple
         game = simple.gameplay(grid, block_size)
