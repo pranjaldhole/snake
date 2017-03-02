@@ -5,9 +5,6 @@ from utils import tools
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-#img_apple = pygame.image.load('images/apple.png')
-#img_head = pygame.image.load('images/snake_head.png')
-
 img_apple = pygame.image.load('D:/Github/snake/images/apple.png')
 img_head = pygame.image.load('D:/Github/snake/images/snake_head.png')
 
