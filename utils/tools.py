@@ -72,9 +72,10 @@ def pause(color,font, screen_size, screen):
                 if event.key == pygame.K_c:
                     paused = False
                 elif event.key == pygame.K_q:
-                    game_intro(screen_size, color, font, screen)
-                    paused = False
+                    game_over(color, font, screen_size, screen)
                     switch = False
+                    paused = False
+
     return switch
 
 def game_over(colors, font, screen_size, screen):
