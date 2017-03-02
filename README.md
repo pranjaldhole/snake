@@ -4,7 +4,6 @@ This is game of Snake developed in python using pygame.
 
 ## How to play the game?
 
-- Make sure the path to the repository is specified at the beginning of main.py
 - Run main.py from either terminal or from any python IDE, e.g., spyder.
 
 ## Game
