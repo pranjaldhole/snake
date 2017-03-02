@@ -5,8 +5,11 @@ from utils import tools
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-img_apple = pygame.image.load('images/apple.png')
-img_head = pygame.image.load('images/snake_head.png')
+#img_apple = pygame.image.load('images/apple.png')
+#img_head = pygame.image.load('images/snake_head.png')
+
+img_apple = pygame.image.load('D:/Github/snake/images/apple.png')
+img_head = pygame.image.load('D:/Github/snake/images/snake_head.png')
 
 # defining game dimensions
 block_size = img_head.get_width() #20
@@ -32,7 +35,7 @@ FPS = 5
 # initializing window for display
 screen = pygame.display.set_mode(display_size)
 clock = pygame.time.Clock()
-version = tools.game_intro(display_size, colors, myfonts, screen)
+    version = tools.game_intro(display_size, colors, myfonts, screen)
 
 gui = True
 while gui:
@@ -45,10 +48,10 @@ while gui:
     switch = True
     while switch:
         dt = clock.tick(FPS)
-    
+
         events = pygame.event.get()
         game.update(events, dt)
-    
+
         for event in events:
             if event.type == pygame.QUIT:
                 switch = False
@@ -58,12 +61,13 @@ while gui:
                 continue
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
-                    params = tools.pause(colors, myfonts, display_size,\
-                                          screen, version)
-                    if params[1] == False:
-                        version = params[0]
-                        switch = False
-    
+                    tools.pause(colors, myfonts, display_size, screen)
+
         screen.fill(colors['white'])
         game.draw(img_head, colors['green'], img_apple, screen)
+
+        if game.gameover == True:
+            tools.game_over(colors, myfonts, display_size, screen)
+            switch = False
+
         pygame.display.flip()
