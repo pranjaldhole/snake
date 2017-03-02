@@ -1,5 +1,5 @@
-import pygame, sys
-sys.path.append('/home/pranjal/git_repos/snake/')
+import pygame, sys, os
+sys.path.append(os.getcwd())
 from utils import tools
 
 pygame.init()  # initiates all inside pygame; returns a tuple
