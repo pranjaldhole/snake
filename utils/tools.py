@@ -78,7 +78,7 @@ def pause(colors, fonts, screen_size, screen):
 
     return switch
 
-def game_over(colors, fonts, screen_size, screen):
+def game_over(score, colors, fonts, screen_size, screen):
     gameover = True
     while gameover:
         for event in pygame.event.get():
@@ -92,7 +92,7 @@ def game_over(colors, fonts, screen_size, screen):
         screen.fill(colors['white'])
         msg2screen("Gameover", colors['green'], -120, "large",\
                     fonts, screen_size, screen)
-        msg2screen(("Scorecard is yet to be added."),\
+        msg2screen(("Your score is %s".format(score)),\
                     colors['red'], -30, "small", fonts, screen_size, screen)
         msg2screen("Press q to return to start screen",\
                     colors['black'], 180, "small", fonts, screen_size, screen)

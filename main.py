@@ -63,7 +63,7 @@ while gui:
                     switch = tools.pause(colors, myfonts, display_size, screen)
 
         if game.gameover == True:
-            tools.game_over(colors, myfonts, display_size, screen)
+            tools.game_over(game.score, colors, myfonts, display_size, screen)
             switch = False
 
         pygame.display.flip()
