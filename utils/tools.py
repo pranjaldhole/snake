@@ -55,7 +55,7 @@ def msg2screen(msg, color, y_displace, size, fonts, screen_size, screen):
     textRect.center = (screen_size[0] / 2), (screen_size[1] / 2) + y_displace
     screen.blit(textSurf, textRect)
 
-def pause(colors, fonts, screen_size, screen):
+def pause(score, colors, fonts, screen_size, screen):
     paused = True
     switch = True
     msg2screen("Paused", colors['green'], -100, "large", fonts, screen_size, screen)
@@ -72,7 +72,7 @@ def pause(colors, fonts, screen_size, screen):
                 if event.key == pygame.K_c:
                     paused = False
                 elif event.key == pygame.K_q:
-                    game_over(colors, fonts, screen_size, screen)
+                    game_over(score, colors, fonts, screen_size, screen)
                     switch = False
                     paused = False
 

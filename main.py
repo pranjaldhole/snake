@@ -60,7 +60,7 @@ while gui:
                 continue
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
-                    switch = tools.pause(colors, myfonts, display_size, screen)
+                    switch = tools.pause(game.score, colors, myfonts, display_size, screen)
 
         if game.gameover == True:
             tools.game_over(game.score, colors, myfonts, display_size, screen)
