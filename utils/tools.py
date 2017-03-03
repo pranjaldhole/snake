@@ -1,6 +1,6 @@
 import pygame, sys
 
-def game_intro(screen_size, colors, font, screen):
+def game_intro(screen_size, colors, fonts, screen):
     intro = True
     version = None
     while intro:
@@ -22,22 +22,22 @@ def game_intro(screen_size, colors, font, screen):
 
         screen.fill(colors['white'])
         msg2screen("Welcome to Game of Snake", colors['green'], -120, "large",\
-                    font, screen_size, screen)
+                    fonts, screen_size, screen)
         msg2screen(("You are Slither the Snake and you can't wait to taste "
                    "those forbidden fruits!"),\
-                    colors['black'], -30, "small", font, screen_size,screen)
+                    colors['black'], -30, "small", fonts, screen_size, screen)
         msg2screen("The more apples you eat, the longer you get...",\
-                    colors['black'], 10, "small", font, screen_size,screen)
+                    colors['black'], 10, "small", fonts, screen_size, screen)
         msg2screen("If you bite into yourself, you die!",\
-                    colors['black'], 50, "small", font, screen_size,screen)
+                    colors['black'], 50, "small", fonts, screen_size, screen)
         msg2screen("Press s to play crude version or",\
-                    colors['black'], 130, "small", font, screen_size, screen)
+                    colors['black'], 130, "small", fonts, screen_size, screen)
         msg2screen("press v to play class-based version of Slither",\
-                    colors['black'], 150, "small", font, screen_size, screen)
+                    colors['black'], 150, "small", fonts, screen_size, screen)
         msg2screen("Press p to pause or press q to quit",\
-                    colors['black'], 180, "small", font, screen_size, screen)
+                    colors['black'], 180, "small", fonts, screen_size, screen)
         pygame.display.update()
-    return(version)
+    return version
 
 # general text object
 def text_obj(text, color, size, fonts):
@@ -50,18 +50,17 @@ def text_obj(text, color, size, fonts):
     return textSurf, textSurf.get_rect()
 
 # general message on screen
-def msg2screen(msg, color, y_displace, size, font, screen_size, screen):
-    textSurf, textRect = text_obj(msg, color, size, font)
+def msg2screen(msg, color, y_displace, size, fonts, screen_size, screen):
+    textSurf, textRect = text_obj(msg, color, size, fonts)
     textRect.center = (screen_size[0] / 2), (screen_size[1] / 2) + y_displace
     screen.blit(textSurf, textRect)
 
-def pause(color,font, screen_size, screen, version):
+def pause(colors, fonts, screen_size, screen):
     paused = True
     switch = True
-    version_new = version
-    msg2screen("Paused", color['green'], -100,"large",font,screen_size,screen)
-    msg2screen("Press C to continue or Q to quit.", color['green'], 25,\
-               "medium",font, screen_size, screen)
+    msg2screen("Paused", colors['green'], -100, "large", fonts, screen_size, screen)
+    msg2screen("Press C to continue or Q to quit.", colors['green'], 25,\
+               "medium", fonts, screen_size, screen)
     pygame.display.update()
     while paused:
         for event in pygame.event.get():
@@ -73,16 +72,14 @@ def pause(color,font, screen_size, screen, version):
                 if event.key == pygame.K_c:
                     paused = False
                 elif event.key == pygame.K_q:
+                    game_over(colors, fonts, screen_size, screen)
+                    switch = False
                     paused = False
-                    version_new = game_over(screen_size,color,font,\
-                                            screen,version)
-                    if version_new != version:
-                        switch = False
-    return(version_new, switch)
 
-def game_over(screen_size, colors, font, screen, version):
+    return switch
+
+def game_over(colors, fonts, screen_size, screen):
     gameover = True
-    version_new = version
     while gameover:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -91,14 +88,13 @@ def game_over(screen_size, colors, font, screen, version):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     gameover = False
-                    version_new = game_intro(screen_size, colors, font, screen)
 
         screen.fill(colors['white'])
         msg2screen("Gameover", colors['green'], -120, "large",\
-                    font, screen_size, screen)
+                    fonts, screen_size, screen)
         msg2screen(("Scorecard is yet to be added."),\
-                    colors['red'], -30, "small", font, screen_size,screen)
+                    colors['red'], -30, "small", fonts, screen_size, screen)
         msg2screen("Press q to return to start screen",\
-                    colors['black'], 180, "small", font, screen_size, screen)
+                    colors['black'], 180, "small", fonts, screen_size, screen)
+
         pygame.display.update()
-    return(version_new)
