@@ -92,8 +92,8 @@ def game_over(score, colors, fonts, screen_size, screen):
         screen.fill(colors['white'])
         msg2screen("Gameover", colors['green'], -120, "large",\
                     fonts, screen_size, screen)
-        msg2screen(("Your score is %s".format(score)),\
-                    colors['red'], -30, "small", fonts, screen_size, screen)
+        msg2screen(("Your score is {}".format(score)),\
+                    colors['red'], -30, "medium", fonts, screen_size, screen)
         msg2screen("Press q to return to start screen",\
                     colors['black'], 180, "small", fonts, screen_size, screen)
 
