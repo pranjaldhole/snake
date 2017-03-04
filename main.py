@@ -49,6 +49,9 @@ while gui:
         game.update(events, dt)
 
         screen.fill(colors['white'])
+        scoretext = myfonts['medfont'].render("Score {0}".format(game.score),\
+                           1, colors['black'])
+        screen.blit(scoretext, (1, 1))
         game.draw(img_head, colors['green'], img_apple, screen)
 
         for event in events:
