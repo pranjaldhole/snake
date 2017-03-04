@@ -45,6 +45,7 @@ class gameplay:
             defines the size of each square block.
         """
         self.gameover = False
+        self.score = 0
         self.speed = 0.25
         self.cooldown = self.speed
         self.steps = max_step
@@ -105,6 +106,7 @@ class gameplay:
                self.snake.pos.y == self.food.y:
                 self.snake = Snake(self.snake.pos, self.snake)
                 self.length += 1
+                self.score += 1
                 self.create_new_food()
 
     def draw(self, snake_head, snake_color, apple_img, screen: Surface):
