@@ -90,7 +90,7 @@ def game_over(score, colors, fonts, screen_size, screen):
                     gameover = False
 
         screen.fill(colors['white'])
-        msg2screen("Gameover", colors['green'], -120, "large",\
+        msg2screen("Game Over", colors['green'], -120, "large",\
                     fonts, screen_size, screen)
         # msg2screen(("Your score is {}".format(score)),\
         #            colors['red'], -30, "medium", fonts, screen_size, screen)
