@@ -92,8 +92,17 @@ def game_over(score, colors, fonts, screen_size, screen):
         screen.fill(colors['white'])
         msg2screen("Gameover", colors['green'], -120, "large",\
                     fonts, screen_size, screen)
+<<<<<<< HEAD
         msg2screen(("Your score is {}".format(score)),\
                     colors['red'], -30, "medium", fonts, screen_size, screen)
+=======
+        if score == 1:
+            msg2screen(("Slither has eaten only 1 apple.".format(score)),\
+                       colors['red'], -30, "small", fonts, screen_size, screen)
+        else:
+            msg2screen(("Slither has eaten {} apples.".format(score)),\
+                       colors['red'], -30, "small", fonts, screen_size, screen)
+>>>>>>> origin/master
         msg2screen("Press q to return to start screen",\
                     colors['black'], 180, "small", fonts, screen_size, screen)
 
