@@ -109,6 +109,8 @@ class gameplay:
                 self.length += 1
                 self.score += 1
                 self.create_new_food()
+                if self.score % 4 == 0:
+                    self.level += 1
 
     def draw(self, snake_head, snake_color, apple_img, screen: Surface):
         # draws snake
