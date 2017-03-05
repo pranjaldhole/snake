@@ -52,6 +52,7 @@ class gameplay:
             defines the size of each square block.
         """
         self.score = 0
+        self.level = 0
         self.gameover = gameover
         self.steps = max_step
         self.blocksize = blocksize
@@ -144,6 +145,9 @@ class gameplay:
             # the apple)
             self.slither.body.insert(0, self.slither.body[0])
             self.score += 1
+            # increases the level only if 10th apple is eaten
+            if self.score % 10 == 0:
+                self.level += 1
 
         # deletes the position of the tail from the body;
         # avoided issue: note that deletion of the tail has to happen <after> the growth of
