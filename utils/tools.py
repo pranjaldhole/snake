@@ -106,3 +106,10 @@ def game_over(score, colors, fonts, screen_size, screen):
                     colors['black'], 180, "small", fonts, screen_size, screen)
 
         pygame.display.update()
+
+def score_menu(width, score, colors, fonts, screen_size, screen):
+    scoretext = text_obj("Score {0}".format(score), \
+                colors['black'], 'medium', fonts)
+    pygame.draw.lines(screen, colors['black'], False, \
+     [(0, screen_size[1] - width), (screen_size[0], screen_size[1] - width)], 1)
+    screen.blit(scoretext[0], (1, screen_size[1] - width + 1))
