@@ -45,13 +45,15 @@ while gui:
         game = slither_class.gameplay(grid, block_size)
     switch = True
     while switch:
-        dt = clock.tick(FPS)
+        dt = clock.tick(FPS + game.level)   # increases the speed as level ups
 
         events = pygame.event.get()
         game.update(events, dt)
 
         screen.fill(colors['white'])
-        tools.score_menu(menu_width, game.score, colors, myfonts, display_size, screen)
+        
+        tools.score_menu(menu_width, game.score, game.level, colors, myfonts, \
+                        display_size, screen)
         game.draw(img_head, colors['green'], img_apple, screen)
 
         for event in events:

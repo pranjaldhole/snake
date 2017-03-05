@@ -46,6 +46,7 @@ class gameplay:
         """
         self.gameover = False
         self.score = 0
+        self.level = 0
         self.speed = 0.25
         self.cooldown = self.speed
         self.steps = max_step
