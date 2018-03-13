@@ -7,9 +7,10 @@ Note: If you're running the script from IDE, make sure you current working direc
 
 ## Game
 <img align="right" src="images/temptation.png" height=100>
+
 - The game consists, as of now two versions:
-    * Simple
-    * Slither
+    + Simple
+    + Slither
 - The simple version has the most basic logical version without much complications. If you're a developer or someone who wants to get into how to program basic games using pygame, this version would serve an a good example.
 - Slither consists of elaborate graphics and gameplay stategies. Play this version for awesome gaming experience.
 
