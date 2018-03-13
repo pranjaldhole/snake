@@ -1,14 +1,12 @@
 # snake
-
 This is game of Snake developed in python using pygame.
 
 ## How to play the game?
-
 Run main.py from either terminal or from any python IDE, e.g., spyder.
 Note: If you're running the script from IDE, make sure you current working directory is the repository.
 
 ## Game
-
+<img align="right" src="images/temptation.png" height=100>
 - The game consists, as of now two versions:
     * Simple
     * Slither
