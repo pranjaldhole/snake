@@ -1,12 +1,18 @@
-import pygame, sys, os
-sys.path.append(os.getcwd())
-from utils import tools
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import sys
+import os
+import pygame
+import simple
+import slither_class
+#sys.path.append(os.getcwd())
+from tools import GAMEPLAY
 
 pygame.init()  # initiates all inside pygame; returns a tuple
 
 # loading graphic objects
-img_apple = pygame.image.load('images/apple.png')
-img_head = pygame.image.load('images/snake_head.png')
+img_apple = pygame.image.load('images/apple.bmp')
+img_head = pygame.image.load('images/snake_head.bmp')
 
 # defining game dimensions
 
@@ -22,9 +28,9 @@ colors = dict(white=(255, 255, 255),
               green=(0, 155, 0))
 
 # Defining custom fonts
-myfonts = dict(smallfont=pygame.font.SysFont("comicsansms", 15),
-               medfont=pygame.font.SysFont("comicsansms", 30),
-               bigfont=pygame.font.SysFont("comicsansms", 50))
+myfonts = dict(small=pygame.font.SysFont("comicsansms", 15),
+               medium=pygame.font.SysFont("comicsansms", 30),
+               large=pygame.font.SysFont("comicsansms", 50))
 
 # Global gameplay variables
 level = 0
@@ -34,14 +40,14 @@ FPS = 5
 screen = pygame.display.set_mode(display_size)
 clock = pygame.time.Clock()
 
+gp = GAMEPLAY(display_size, colors, myfonts, screen)
+
 gui = True
 while gui:
-    version = tools.game_intro(display_size, colors, myfonts, screen)
+    version = gp.game_intro()
     if version == 'simple':
-        from versions import simple
         game = simple.gameplay(grid, block_size)
     elif version == 'slither_class':
-        from versions import slither_class
         game = slither_class.gameplay(grid, block_size)
     switch = True
     while switch:
@@ -51,9 +57,8 @@ while gui:
         game.update(events, dt)
 
         screen.fill(colors['white'])
-        
-        tools.score_menu(menu_width, game.score, game.level, colors, myfonts, \
-                        display_size, screen)
+
+        gp.score_menu(menu_width, game.score, game.level)
         game.draw(img_head, colors['green'], img_apple, screen)
 
         for event in events:
@@ -65,10 +70,10 @@ while gui:
                 continue
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
-                    switch = tools.pause(game.score, colors, myfonts, display_size, screen)
+                    switch = gp.pause(game.score)
 
         if game.gameover == True:
-            tools.game_over(game.score, colors, myfonts, display_size, screen)
+            gp.game_over(game.score)
             switch = False
 
         pygame.display.flip()

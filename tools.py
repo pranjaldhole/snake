@@ -46,8 +46,7 @@ class GAMEPLAY(object):
 
             self.screen.fill(self.colors['white'])
             self.msg2screen("Welcome to Game of Snake", self.colors['green'], -120, "large",)
-            self.msg2screen(("You are Slither the Snake and you can't wait to taste\n",\
-                        "those forbidden fruits!"),\
+            self.msg2screen(("You are Slither the Snake and you can't wait to taste\nthose forbidden fruits!"),\
                         self.colors['black'], -30, "small")
             self.msg2screen("The more apples you eat, the longer you get...",\
                         self.colors['black'], 10, "small")
@@ -62,16 +61,11 @@ class GAMEPLAY(object):
             pygame.display.update()
         return version
 
-    def text_obj(self, color, text, size):
+    def text_obj(self, text, color, size):
         '''
         general text object
         '''
-        if size == 'small':
-            text_surf = self.fonts['smallfont'].render(text, True, color)
-        elif size == 'medium':
-            text_surf = self.fonts['medfont'].render(text, True, color)
-        elif size == 'large':
-            text_surf = self.fonts['bigfont'].render(text, True, color)
+        text_surf = self.fonts[size].render(text, True, color)
         return text_surf, text_surf.get_rect()
 
     def msg2screen(self, msg, color, y_displace, size):
