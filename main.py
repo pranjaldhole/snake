@@ -46,20 +46,23 @@ gui = True
 while gui:
     version = gp.game_intro()
     if version == 'simple':
-        game = simple.gameplay(grid, block_size)
+        game = simple.Gameplay(grid, block_size)
     elif version == 'slither_class':
         game = slither_class.gameplay(grid, block_size)
     switch = True
     while switch:
-        dt = clock.tick(FPS + game.level)   # increases the speed as level ups
+        delta_time = clock.tick(FPS + game.level)   # increases the speed as level ups
 
         events = pygame.event.get()
-        game.update(events, dt)
+        game.update(events, delta_time)
 
         screen.fill(colors['white'])
 
         gp.score_menu(menu_width, game.score, game.level)
-        game.draw(img_head, colors['green'], img_apple, screen)
+        if version == 'simple':
+            game.draw(colors['green'], screen)
+        elif version == 'slither_class':
+            game.draw(img_head, colors['green'], img_apple, screen)
 
         for event in events:
             if event.type == pygame.QUIT:
