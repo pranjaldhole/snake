@@ -103,18 +103,21 @@ class gameplay:
         # 1. Movement direction update
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a and self.direction != "right":
+                if event.key == pygame.K_LEFT and self.direction != "right":
                     self.direction = "left"
                     self.velocity = vector2(-1, 0)
-                elif event.key == pygame.K_d and self.direction != "left":
+                elif event.key == pygame.K_RIGHT and self.direction != "left":
                     self.direction = "right"
                     self.velocity = vector2(1, 0)
-                elif event.key == pygame.K_w and self.direction != "down":
+                elif event.key == pygame.K_UP and self.direction != "down":
                     self.direction = "up"
                     self.velocity = vector2(0, -1)
-                elif event.key == pygame.K_s and self.direction != "up":
+                elif event.key == pygame.K_DOWN and self.direction != "up":
                     self.direction = "down"
                     self.velocity = vector2(0, 1)
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit('you exited the game')
 
         # 2. Boundary collision conditions
         if self.slither.head.x == self.steps[0] - 1 and self.direction == "right":
