@@ -3,3 +3,8 @@
 
 #Byte-compiled files
 __pycache__/
+*.pyc
+
+# Visual code studio
+.vscode/
+
