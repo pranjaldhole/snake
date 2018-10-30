@@ -48,13 +48,16 @@ while gui:
     if version == 'simple':
         game = simple.Gameplay(grid, block_size)
     elif version == 'slither_class':
-        game = slither_class.gameplay(grid, block_size)
+        game = slither_class.Gameplay(grid, block_size)
     switch = True
     while switch:
         delta_time = clock.tick(FPS + game.level)   # increases the speed as level ups
 
         events = pygame.event.get()
-        game.update(events, delta_time)
+        if version == 'simple':
+            game.update(events, delta_time)
+        elif version == 'slither_class':
+            game.update(events)
 
         screen.fill(colors['white'])
 

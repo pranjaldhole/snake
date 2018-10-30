@@ -1,15 +1,27 @@
-import pygame
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+'''
+Implementation of snake game.
+This class contains graphics and mostly build for enhanced gameplay experience.
+'''
+import sys
 from random import randint
-from pygame.surface import Surface
+import pygame
 
-init_direction = 'right'
+INIT_DIRECTION = 'right'
 
-class vector2:
+class Vector2(object):
+    '''
+    Creates an instance of 2-D vector.
+    '''
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-class snake:
+class Snake(object):
+    '''
+    Object Snake
+    '''
     def __init__(self, head_xy, body):
         """ The snake is defined by its head and its body (which grows after
         eating apples)
@@ -39,7 +51,10 @@ class snake:
                blocksize - 1, blocksize - 1])
         screen.blit(head_img, (self.head.x * blocksize, self.head.y * blocksize))
 
-class gameplay:
+class Gameplay(object):
+    '''
+    Updates gameplay parameters for snake
+    '''
     def __init__(self, max_step, blocksize, gameover=False):
         """Initiates the actual gameplay and defines relevant parameters for
         the game.
@@ -47,29 +62,29 @@ class gameplay:
         Arguments
         ----------
         max_step: list [x,y]
-            defines maximum number of steps in x and y.
+            defines maximum number of max_step in x and y.
         blocksize: int
             defines the size of each square block.
         """
         self.score = 0
         self.level = 0
-        self.gameover = gameover
-        self.steps = max_step
+        self.max_step = max_step
         self.blocksize = blocksize
+        self.gameover = gameover
         # initiates the position of the snake and imports the 'snake' class into
         # a local method 'self.slither'
-        head_pos = vector2(max_step[0] // 2, max_step[1] // 2)
-        self.slither = snake(head_pos, [head_pos])
+        head_pos = Vector2(self.max_step[0] // 2, self.max_step[1] // 2)
+        self.slither = Snake(head_pos, [head_pos])
 
         # initiates the velocity and direction
-        self.velocity = vector2(1, 0)
-        self.direction = init_direction
+        self.velocity = Vector2(1, 0)
+        self.direction = INIT_DIRECTION
 
         # initializes the apple position
-        self.apple = vector2(randint(0, self.steps[0] - 1),\
-                             randint(0, self.steps[1] - 1))
+        self.apple = Vector2(randint(0, self.max_step[0] - 1),\
+                             randint(0, self.max_step[1] - 1))
 
-    def update(self, events, dt):
+    def update(self, events):
         """ Updates the position of snake with:
 
         1. Movement direction update
@@ -105,44 +120,44 @@ class gameplay:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT and self.direction != "right":
                     self.direction = "left"
-                    self.velocity = vector2(-1, 0)
+                    self.velocity = Vector2(-1, 0)
                 elif event.key == pygame.K_RIGHT and self.direction != "left":
                     self.direction = "right"
-                    self.velocity = vector2(1, 0)
+                    self.velocity = Vector2(1, 0)
                 elif event.key == pygame.K_UP and self.direction != "down":
                     self.direction = "up"
-                    self.velocity = vector2(0, -1)
+                    self.velocity = Vector2(0, -1)
                 elif event.key == pygame.K_DOWN and self.direction != "up":
                     self.direction = "down"
-                    self.velocity = vector2(0, 1)
+                    self.velocity = Vector2(0, 1)
                 elif event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit('you exited the game')
 
         # 2. Boundary collision conditions
-        if self.slither.head.x == self.steps[0] - 1 and self.direction == "right":
+        if self.slither.head.x == self.max_step[0] - 1 and self.direction == "right":
             self.slither.head.x = - 1
         elif self.slither.head.x == 0 and self.direction == "left":
-            self.slither.head.x = self.steps[0]
-        elif self.slither.head.y == self.steps[1] - 1 and self.direction == "down":
+            self.slither.head.x = self.max_step[0]
+        elif self.slither.head.y == self.max_step[1] - 1 and self.direction == "down":
             self.slither.head.y = - 1
         elif self.slither.head.y == 0 and self.direction == "up":
-            self.slither.head.y = self.steps[1]
+            self.slither.head.y = self.max_step[1]
 
         # Updates position based on the changes in 1. and 2. above
-        self.slither.head = vector2(self.slither.head.x + self.velocity.x, \
+        self.slither.head = Vector2(self.slither.head.x + self.velocity.x, \
                                     self.slither.head.y + self.velocity.y)
 
         # adds the head's new position to the body
-        self.slither.body.append(vector2(self.slither.head.x, self.slither.head.y))
+        self.slither.body.append(Vector2(self.slither.head.x, self.slither.head.y))
 
         # 3. Does the snake eat the apple?
         # Note that both head and food are of the same class vector2
         if (self.slither.head.x, self.slither.head.y) \
                                             == (self.apple.x, self.apple.y):
             # creates new apple position
-            self.apple = vector2(randint(0, self.steps[0] - 1), \
-                                 randint(0, self.steps[1] - 1))
+            self.apple = Vector2(randint(0, self.max_step[0] - 1), \
+                                 randint(0, self.max_step[1] - 1))
             # grows a part of the body at the tail (manifests as one step
             # pause of tail's movement on the screen at the step of eating
             # the apple)
@@ -162,8 +177,8 @@ class gameplay:
         # 4. Does the snake bite itself? If so, game over
         for part in self.slither.body[:-1]:
             if (self.slither.head.x, self.slither.head.y) == (part.x, part.y):
-               self.gameover = True
-               print('Game over')
+                self.gameover = True
+                print 'Game over'
 
     def draw(self, snake_head, snake_color, apple_img, screen):
         """ A function that draws the snake (and apples) onto screen
