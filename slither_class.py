@@ -5,12 +5,12 @@ from pygame.surface import Surface
 init_direction = 'right'
 
 class vector2:
-    def __init__(self, x: int, y: int):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
 class snake:
-    def __init__(self, head_xy: vector2, body: list):
+    def __init__(self, head_xy, body):
         """ The snake is defined by its head and its body (which grows after
         eating apples)
 
@@ -28,7 +28,7 @@ class snake:
         self.head = head_xy
         self.body = body
 
-    def draw_snake(self, head_img, color, screen: Surface, blocksize: int):
+    def draw_snake(self, head_img, color, screen, blocksize):
         """ Draws a head at the coords of the last element in body (head coords)
         Then draws a part of the body (block) for each point in body list,
         except the head
@@ -40,7 +40,7 @@ class snake:
         screen.blit(head_img, (self.head.x * blocksize, self.head.y * blocksize))
 
 class gameplay:
-    def __init__(self, max_step: list, blocksize: int, gameover = False):
+    def __init__(self, max_step, blocksize, gameover=False):
         """Initiates the actual gameplay and defines relevant parameters for
         the game.
 
@@ -69,7 +69,7 @@ class gameplay:
         self.apple = vector2(randint(0, self.steps[0] - 1),\
                              randint(0, self.steps[1] - 1))
 
-    def update(self, events, dt:float):
+    def update(self, events, dt):
         """ Updates the position of snake with:
 
         1. Movement direction update
@@ -162,7 +162,7 @@ class gameplay:
                self.gameover = True
                print('Game over')
 
-    def draw(self, snake_head, snake_color, apple_img, screen: Surface):
+    def draw(self, snake_head, snake_color, apple_img, screen):
         """ A function that draws the snake (and apples) onto screen
 
         Arguments

@@ -9,16 +9,16 @@ DIRECTION_LEFT = "left"
 
 
 class Vector2:
-    def __init__(self, x: int, y: int):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
 class Snake:
-    def __init__(self, pos:Vector2, tail = None):
+    def __init__(self, pos, tail = None):
         self.pos = pos
         self.tail = tail
 
-    def take(self, n: int):
+    def take(self, n):
         if n < 1:
             return None
         elif self.tail is None:
@@ -33,7 +33,7 @@ class Snake:
             self.tail.draw(color, screen, size)
 
 class gameplay:
-    def __init__(self, max_step: list, blocksize: int):
+    def __init__(self, max_step, blocksize):
         """Initiates the actual gameplay and defines relevant parameters for
         the game.
 
@@ -60,7 +60,7 @@ class gameplay:
         self.food = Vector2(random.randint(0, self.steps[0] - 1), \
                             random.randint(0, self.steps[1] - 1))
 
-    def update(self, events, dt:float):
+    def update(self, events, dt):
         #check for change of direction
         for event in events:
             if event.type == pygame.KEYDOWN:
@@ -112,7 +112,7 @@ class gameplay:
                 if self.score % 4 == 0:
                     self.level += 1
 
-    def draw(self, snake_head, snake_color, apple_img, screen: Surface):
+    def draw(self, snake_head, snake_color, apple_img, screen):
         # draws snake
         self.snake.draw(snake_color, screen, self.blocksize)
 
