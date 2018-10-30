@@ -1,0 +1,6 @@
+name: pygaming
+channels:
+  - cogsci
+dependencies:
+  - pygame
+
