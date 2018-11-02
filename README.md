@@ -13,7 +13,7 @@ source activate pygaming
 ```
 
 ## How to play the game?
-You can start the game by executing the command `python main.py` from terminal
+You can start the game by executing the command `python2 main.py` from terminal
 or from any python IDE, e.g., spyder, visual studio code, etc.<br>
 **Note**: If you're running the script from IDE, make sure you current working directory is the repository.
 

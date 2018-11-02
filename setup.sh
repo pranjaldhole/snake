@@ -1,5 +1,4 @@
 #!/bin/bash
-# Create conda environment
-# Activate with: source activate pygaming
-conda env create --force -f environment.yml
+# Python2 pygame installation
+sudo apt-get install python-pygame
 
