@@ -3,13 +3,9 @@ This is game of Snake developed in `python=2.7` using `pygame`.
 
 ## Installation
 ### For UBUNTU and its variants
-1. Installing `conda` environment
+Install `python-pygame` package
 ```
-./setup.sh
-```
-2. Activate the environment by running
-```
-source activate pygaming
+sudo apt-get install python-pygame
 ```
 
 ## How to play the game?
