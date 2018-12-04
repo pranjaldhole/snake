@@ -14,7 +14,7 @@ or from any python IDE, e.g., spyder, visual studio code, etc.<br>
 **Note**: If you're running the script from IDE, make sure you current working directory is the repository.
 
 ## Game
-<img align="right" src="https://github.com/pranjaldhole/snake/blob/master/images/temptation.png" height="100">
+<img align="right" src="images/temptation.png" height="100">
 
 - The game consists, as of now, two versions:
     + Simple
