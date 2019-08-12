@@ -1,0 +1,8 @@
+name: snake
+channels:
+  - anaconda
+dependencies:
+  - python=3.6
+  - pip
+  - pip:
+    - pygame

@@ -178,7 +178,7 @@ class Gameplay(object):
         for part in self.slither.body[:-1]:
             if (self.slither.head.x, self.slither.head.y) == (part.x, part.y):
                 self.gameover = True
-                print 'Game over'
+                print('Game over')
 
     def draw(self, snake_head, snake_color, apple_img, screen):
         """ A function that draws the snake (and apples) onto screen

@@ -2,16 +2,36 @@
 This is game of Snake developed in `python=2.7` using `pygame`.
 
 ## Installation
+
 ### For UBUNTU and its variants
-Install `python-pygame` package
+
+#### Within `anaconda` environment (Recommended)
+
+1. Create anaconda environment from terminal
+```
+conda create env -f environment.yml
+```
+This will install python=3.6 compatible version of `pygame` within an anaconda environment called `snake`.
+
+2. Activate the anaconda environment from terminal
+```
+conda activate snake
+```
+
+3. Run the game from terminal
+```
+python main.py
+```
+This will open a window with the game. Enjoy!
+
+#### Install `python-pygame` package directly
+
 ```
 sudo apt-get install python-pygame
 ```
-
-## How to play the game?
-You can start the game by executing the command `python2 main.py` from terminal
+afterwards you can start the game by executing the command `python2 main.py` from terminal
 or from any python IDE, e.g., spyder, visual studio code, etc.<br>
-**Note**: If you're running the script from IDE, make sure you current working directory is the repository.
+**Note**: If you're running the script from IDE, make sure you current working directory is on the `current` path.
 
 ## Game
 <img align="right" src="images/temptation.png" height="100">
