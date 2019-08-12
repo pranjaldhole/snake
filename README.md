@@ -11,7 +11,7 @@ This is game of Snake developed in `python=2.7` using `pygame`.
 ```
 conda create env -f environment.yml
 ```
-This will install python=3.6 compatible version of `pygame` within an anaconda environment called `snake`.
+This will install `python=3.6` compatible version of `pygame` within an anaconda environment called `snake`.
 
 2. Activate the anaconda environment from terminal
 ```
