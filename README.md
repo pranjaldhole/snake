@@ -1,5 +1,5 @@
-# snake
-This is game of Snake developed in `python=3.6` using `pygame`.
+# Snake
+This is game of snake developed in `python=3.6` using `pygame`.
 
 ## Installation (for UBUNTU and its variants)
 
