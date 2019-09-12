@@ -1,5 +1,5 @@
 # snake
-This is game of Snake developed in `python=2.7` using `pygame`.
+This is game of Snake developed in `python=3.6` using `pygame`.
 
 ## Installation
 
