@@ -1,11 +1,9 @@
 # snake
 This is game of Snake developed in `python=3.6` using `pygame`.
 
-## Installation
+## Installation (for UBUNTU and its variants)
 
-### For UBUNTU and its variants
-
-#### Within `anaconda` environment (Recommended)
+### 1. Within `anaconda` environment (Recommended)
 
 1. Create anaconda environment from terminal
 ```
@@ -24,7 +22,7 @@ python main.py
 ```
 This will open a window with the game. Enjoy!
 
-#### Install `python-pygame` package directly
+### 2. Alternatively, install `python-pygame` package directly
 
 ```
 sudo apt-get install python-pygame
