@@ -1,0 +1,9 @@
+theme: jekyll-theme-cayman
+title: Snake
+title_suffix: Snake game written in python using pygame.
+plugins:
+  - jekyll-relative-links
+baseurl: /snake
+
+titles_from_headings:
+  enabled:     false
