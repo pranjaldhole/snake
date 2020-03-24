@@ -35,7 +35,6 @@ or from any python IDE, e.g., spyder, visual studio code, etc.<br>
 **Note**: If you're running the script from IDE, make sure you current working directory is on the `current` path.
 
 ## Game play
-<img align="right" src="../images/temptation.png" height="100">
 
 - The game consists, as of now, two versions:
     + Simple
