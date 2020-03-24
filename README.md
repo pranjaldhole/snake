@@ -1,6 +1,8 @@
 # Snake
 This is game of snake developed in `python=3.6` using `pygame`.
 
+![Snake - Game play](docs/graphics/snake.gif)
+
 ## Installation (for UBUNTU and its variants)
 
 ### 1. Within `anaconda` environment (Recommended)

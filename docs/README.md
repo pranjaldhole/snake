@@ -2,7 +2,7 @@
 
 This is game of snake developed in `python=3.6` using `pygame`.
 
-![Snake](./graphics/snake.png)
+![Snake](./graphics/snake.gif)
 
 ## Installation (for UBUNTU and its variants)
 
